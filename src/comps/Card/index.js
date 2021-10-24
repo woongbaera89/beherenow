@@ -21,7 +21,7 @@ const Text = styled.div`
   white-space: pre-wrap;
    
   & h1 {
-    font-size:1.8em;
+    font-size:1.7em;
     font-weight:normal;
     position:absolute;
     left:5.5%;
@@ -49,16 +49,19 @@ const Text = styled.div`
   }
 
   & .t3 {
-    margin-top: 3em; 
+    margin-top: 2.4em; 
   }
 
   & .t4 {
-    margin-top: 1.3em; 
+    margin-top: 1.2em; 
+    margin-bottom: 2.4em; 
   }
 
   & .desc {
     font-size: 0.84em;
-    margin-top: 4em; 
+  }
+  & .desc.title {
+    font-weight:bold;
   }
 
   & .anim {
@@ -77,6 +80,28 @@ const Text = styled.div`
     opacity:1;
     transform: translate(0, 0);
   }
+  
+
+  @media (max-width: 1040px) { 
+    font-size:15px;
+
+    & h1 {
+      font-size:1.25em;
+      left:10%;
+      width:80%;
+      top:25%;
+      max-width:540px;
+    }
+  
+    & div {
+      line-height: 1.5;
+      position:absolute;
+      left:10%;
+      width:80%;
+      right:10%;
+      bottom:10%;
+    }
+  }
 `;
 
 const Card = ({
@@ -85,7 +110,8 @@ const Card = ({
 }) => {
   return (
     <Container>
-      <Bg style={{backgroundImage:`url(${data.bg})`}}/>
+      <Bg className="dd" style={{backgroundImage:`url(${data.bg})`}}/>
+      <Bg className="mm" style={{backgroundImage:`url(${data.menuBg[2]})`}}/>
       {data && (
         <Text>
           <h1 className={active ? "anim visible" : "anim"}>{data.main}</h1>
@@ -94,6 +120,7 @@ const Card = ({
             <p className="t2">{data.t2}</p>
             <p className="t3">{data.t3}</p>
             <p className="t4">{data.t4}</p>
+            <p className="desc title">{data.descTitle}</p>
             <p className="desc">{data.desc}</p>
           </div>
         </Text>

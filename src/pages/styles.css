@@ -1,5 +1,19 @@
 /* @import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&display=swap'); */
-@import url('https://fonts.googleapis.com/css2?family=Arsenal:wght@400;700&family=Nanum+Myeongjo&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&display=swap');
+
+@font-face {
+    font-family: 'Optima';
+    font-style: normal;
+    font-weight: normal;
+    src: url('OPTIMA.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Optima';
+    font-style: normal;
+    font-weight: bold;
+    src: url('OPTIMA_B.woff') format('woff');
+}
 
 * {
     box-sizing: border-box;
@@ -18,8 +32,8 @@ p {
 
 html {
     background:#313235;
-    font-family: 'Arsenal', 'Nanum Myeongjo', serif;
-    color: #D9D9D9;
+    font-family: 'Optima', 'Nanum Myeongjo', serif;
+    color: #ccc;
 }
 
 html, body, #gatsby-focus-wrapper, #___gatsby {
@@ -35,6 +49,10 @@ main {
 
 .swiper-slide {
     display:flex
+}
+
+.swiper-horizontal>.swiper-pagination-bullets, .swiper-pagination-bullets.swiper-pagination-horizontal, .swiper-pagination-custom, .swiper-pagination-fraction {
+    bottom: 14px;
 }
 
 .swiper-vertical > .swiper-scrollbar {
@@ -55,4 +73,28 @@ main {
 
 .swiper-horizontal {
     min-width: 100%;
+}
+
+.swiper-horizontal {
+    min-width: 100%;
+}
+
+.mm {
+    display:none;
+}
+
+.dd {
+    display:inherit;
+}
+
+@media (max-width: 1040px) { 
+    
+    .dd {
+        display:none;
+    }
+
+    .mm {
+        display:block;
+    }
+
 }

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react"
-import { Mousewheel, Scrollbar, Keyboard, Pagination } from 'swiper';
+import { Mousewheel, Scrollbar, Autoplay, Keyboard, Pagination, EffectFade } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import styled from "@emotion/styled"
-import Menu from "../comps/Menu"
+import Box from "../comps/Menu/box"
 import Card from "../comps/Card"
 import Desc from "../comps/Desc"
 
@@ -12,6 +12,7 @@ import 'swiper/css/scrollbar';
 import 'swiper/css/mousewheel';
 import 'swiper/css/keyboard';
 import "swiper/css/pagination"
+import "swiper/css/effect-fade"
 import './styles.css';
 
 import logo from "../images/logo.png"
@@ -27,142 +28,150 @@ import m11 from "../images/m1_1.jpg"
 import m21 from "../images/m2_1.jpg"
 import m31 from "../images/m3_1.jpg"
 import m41 from "../images/m4_1.jpg"
+import m12 from "../images/mbg1.jpg"
+import m22 from "../images/mbg2.jpg"
+import m32 from "../images/mbg3.jpg"
+import m42 from "../images/mbg4.jpg"
 
 
 const data = [
   {
     bg: b1,
-    menuBg: [m1, m11],
+    menuBg: [m1, m11, m12],
     menuPos: 10,
+    menuPosM: 47,
     main: `“솜털 같은 빛은 낭만적이고,\n바삭바삭한 빛은 사랑스럽다”`,
     t1: "빛으로 공간을 어루만지는",
     t2: "Chock Gak",
     t3: "손끝에 닿으면 사라질 것 같은 빛의 질감으로\n낯선 감각을 밝히다.",
     t4: "Light up exotic sensation with\nthe texture of light that seems to disappear\nas you reach out your fingertips.",
-    desc: "Chock Gak 001\nStainless steel, aluminum, polyvinyl chloride, led\n500*400*50mm"
+    descTitle: "Chock Gak 001",
+    desc: "Stainless steel, aluminum, polyvinyl chloride, led\n500*400*50mm"
   },
   {
     bg: b2,
-    menuBg: [m2, m21],
+    menuBg: [m2, m21, m22],
     menuPos: 52,
+    menuPosM: 12,
     main: `“빛의 느슨한 경계는\n나의 감각을 무디게 한다.”`,
     t1: "존재만으로도 빛나는",
     t2: "See Gak",
     t3: "근원적으로 끓어오르는 두 개의 빛으로\n보이지 않던 감각이 깨어나다.",
     t4: "Enlightening unseen sensation\nwith two lights that rise above from the basis.",
-    desc: "See Gak 001\nStainless steel, aluminum, brass, led\n1200*400*100mm"
+    descTitle: "See Gak 001",
+    desc: "Stainless steel, aluminum, brass, led\n1200*400*100mm"
   },
   {
     bg: b3,
-    menuBg: [m3, m31],
+    menuBg: [m3, m31, m32],
     menuPos: 18,
+    menuPosM: 52,
     main: `“한 줌 빛 속에서 소리를 본다면,\n그 곳은 장소가 된다.”`,
     t1: "빛으로 말을거는",
     t2: "Cheong Gak",
     t3: "자연의 소리에 반응하는 빛으로\n새로운 감각이 불어오다.",
     t4: "Blowing a new sensation with light \nresponding to the sound of nature.",
-    desc: "Cheng Gak 001\nStainless steel, steel coil, ring led, film speaker\n100*1200*100mm"
+    descTitle: "Cheng Gak 001",
+    desc: "Stainless steel, steel coil, ring led, film speaker\n100*1200*100mm"
   },
   {
     bg: b4,
-    menuBg: [m4, m41],
+    menuBg: [m4, m41, m42],
     menuPos: 33,
+    menuPosM: 36,
     main: `“빛은 사라지는 순간을 기록하고,\n그 순간이 쌓여 공간의 형상을 만든다.”`,
     t1: "빛의 향기를 내뿜는",
     t2: "Hoo Gak",
     t3: "안개처럼 피어오르는 빛의 향기로\n또 다른 감각이  스며들다.",
     t4: "Permeating another sensation\nwith the scent of light that blooms like fog.",
-    desc: "Hoo Gak 001\nStainless steel, brass, aluminum, led\n120*2000*100mm"
+    descTitle: "Hoo Gak 001",
+    desc: "Stainless steel, brass, aluminum, led\n120*2000*100mm"
   }
 ]
 
 
 const desc = [
-  `  우리는 현재에 집중하며
-  지금 이 순간
-  우리가 보고, 듣고, 느끼는 것들을
-  공감하고 나누기 위해 
-  오브제의 의미를 고민합니다.
-  
-  
-  우리의 영감이
-  오늘을 살아가는
-  당신의 삶에 
-  닿을 수 있도록
-  
-  
-  존재하다. 바로. 이 순간을 위해.
-  
-  
-  시간과 공간의 감각을 깨우는 
-  오브제 브랜드
-  BeHereNow
-  
-  .
-  We focus on the present 
-  this very moment
-  exploring the meaning of objects
-  in order to share
-  the things we see, hear, and feel.
-  
-  
-  So that our inspiration 
-  can reach the lives of people 
-  living today.
-  
-  
-  We exist for this moment.
-  
-  
-  Objet brand that awakens 
-  sensations of space and time.
-  BeHereNow`,
-  `  SEASONNAL
+`우리는 현재에 집중하며
+지금 이 순간
+우리가 보고, 듣고, 느끼는 것들을
+공감하고 나누기 위해 
+오브제의 의미를 고민합니다.
 
-  BeHereNow는
-  시즌별로 감각을 깨우는
-  새로운 테마를 선정하고
-  테마에 따른 오브제 라인업을 
-  런칭 합니다.
-  
-  .
-  For each season, 
-  BeHereNow selects 
-  a different theme to 
-  awaken the senses with 
-  a new object lineup 
-  launch.
-  `,
-  `  IN STAY
+우리의 영감이 오늘을 살아가는
+당신의 삶에 닿을 수 있도록
 
-  BeHereNow는
-  시즌별로 테마 공간으로
-  공간 안에서 오브제를
-  자유롭게 경험할 수 있도록
-  합니다.
-  
-  .
-  For each season, 
-  BeHereNow shares a new 
-  spatial theme offering a free 
-  experience with objects 
-  in different settings.`,
-  `  ONLY RESERVATION 
+존재하다. 바로. 이 순간을 위해.
 
-  BeHereNow의
-  오브제는 예약제로 판매됩니다.
-  기다림의 시간을 거쳐
-  완성되는 오브제는 시간의 가치를
-  담고 있습니다.
-  
-  .
-  BeHereNow objects 
-  are available for purchase 
-  by reservation. 
-  Over the period they are 
-  being produced, they capture 
-  the value of time.
-  `
+시간과 공간의 감각을 깨우는 
+오브제 브랜드
+BeHereNow
+
+.
+We focus on the present 
+this very moment
+exploring the meaning of objects
+in order to share
+the things we see, hear, and feel.
+
+So that our inspiration 
+can reach the lives of people 
+living today.
+
+We exist for this moment.
+
+Objet brand that awakens 
+sensations of space and time.
+BeHereNow
+.`,
+`SEASONNAL
+
+BeHereNow는
+시즌별로 감각을 깨우는
+새로운 테마를 선정하고
+테마에 따른 오브제 라인업을 
+런칭 합니다.
+
+
+.
+For each season, 
+BeHereNow selects 
+a different theme to 
+awaken the senses with 
+a new object lineup 
+launch.
+`,
+`IN STAY
+
+BeHereNow는
+시즌별로 테마 공간으로
+공간 안에서 오브제를
+자유롭게 경험할 수 있도록
+합니다.
+
+
+.
+For each season, 
+BeHereNow shares a new 
+spatial theme offering a free 
+experience with objects 
+in different settings.`,
+`ONLY RESERVATION 
+
+BeHereNow의
+오브제는 예약제로 판매됩니다.
+기다림의 시간을 거쳐
+완성되는 오브제는 시간의 가치를
+담고 있습니다.
+
+
+.
+BeHereNow objects 
+are available for purchase 
+by reservation. 
+Over the period they are 
+being produced, they capture 
+the value of time.
+`
 ]
 
 const Main = styled.main`
@@ -187,7 +196,7 @@ const Logo = styled.div`
   transition:transform 0.4s ease-out;
 
   @media (max-width: 640px) {
-    transform: scale(0.75) translateY(-3%);
+    transform: scale(0.75) translateY(-10px);
   }
 `
 
@@ -223,15 +232,51 @@ const IndexPage = () => {
         mousewheel={{invert:false}}
         keyboard={{enabled:true}}
         speed={600}
+        autoplay={{
+          "delay": 2500,
+          "disableOnInteraction": false
+        }}
         scrollbar={{ draggable: false }}
         onSwiper={setSwiper}
-        onSlideChangeTransitionEnd={(swiper) => {
-          setSlideIndex(swiper.activeIndex)
+        onSlideChange={(swiper) => {
+          setTimeout(()=>setSlideIndex(swiper.activeIndex),600)
         }}
         style={{ width: '100%', height: '100%' }} 
       >
         <SwiperSlide>
-          <Menu handleMenuClick={handleMenuClick} data={data} />
+          <Swiper 
+            className="dd"
+            modules={[ Pagination, Keyboard ]}
+            spaceBetween={0} 
+            slidesPerView={4}
+            >
+              {data.map((each, index) => (
+                <SwiperSlide key={`menu${index}`}>
+                  <Box onClick={() => handleMenuClick(index+2)} data={each} index={index} />
+                </SwiperSlide>
+              ))}
+          </Swiper>
+          <Swiper 
+            className="mm"
+            modules={[ Pagination, Keyboard, EffectFade, Autoplay ]}
+            spaceBetween={0} 
+            keyboard={{enabled:true}}
+            slidesPerView={1}
+            speed={600}
+            effect={'fade'}
+            autoplay={{
+              delay: 3500,
+              disableOnInteraction: false
+            }}
+            pagination={{
+              "clickable": true
+            }}>
+              {data.map((each, index) => (
+                <SwiperSlide key={`menu${index}`}>
+                  <Box onClick={() => handleMenuClick(index+2)} data={each} index={index} />
+                </SwiperSlide>
+              ))}
+          </Swiper>
         </SwiperSlide>
         <SwiperSlide>
           <Swiper 
@@ -239,16 +284,17 @@ const IndexPage = () => {
             spaceBetween={0} 
             keyboard={{enabled:true}}
             slidesPerView={4}
+            speed={600}
             breakpoints={{
               100: {
                 slidesPerView: 1,
                 spaceBetween: 0,
               },
-              640: {
+              720: {
                 slidesPerView: 2,
                 spaceBetween: 0,
               },
-              960: {
+              1040: {
                 slidesPerView: 4,
                 spaceBetween: 0,
               },
@@ -258,7 +304,7 @@ const IndexPage = () => {
             }}>
               {desc.map((each, index) => (
                 <SwiperSlide key={`desc${index}`}>
-                  <Desc data={each}/>
+                  <Desc data={each} index={index}/>
                 </SwiperSlide>
               ))}
           </Swiper>
