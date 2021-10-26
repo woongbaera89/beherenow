@@ -37,7 +37,7 @@ const Bg = styled.div`
 
 const Text = styled.div`
   position:absolute;
-  left:15%;
+  left:10%;
   bottom:15%;
   word-break: keep-all;
   line-height: 1.3;

@@ -7,7 +7,7 @@ const Container = styled.div`
 `
 const Text = styled.div`
   position:absolute;
-  left:14%;
+  left:10%;
   top:13%;
   word-break: keep-all;
   line-height: 1.3;
